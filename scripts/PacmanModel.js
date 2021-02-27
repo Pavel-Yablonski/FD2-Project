@@ -1803,6 +1803,14 @@ class PacmanModel {
                     this.bonusPillsSecond[i].color = "red";
                 }
 
+                for (let i = 0; i < this.pillsThird.length; i++) {
+                    this.pillsThird[i].color = "purple";
+                }
+    
+                for (let i = 0; i < this.bonusPillsThird.length; i++) {
+                    this.bonusPillsThird[i].color = "white";
+                }
+
                 for (let i = 0; i < this.pillsFirst.length; i++) {
                     this.pillsFirst[i].color = "white";
                 }
