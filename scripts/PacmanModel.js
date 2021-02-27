@@ -1434,7 +1434,7 @@ class PacmanModel {
                                         this.ghostSettings[i].color = "blue";  
                                     }, 400);
                                 }
-                            }, 7000);
+                            }, 5000);
         
                             this.ghostTimeEnd1 = setTimeout(() => {
                                 clearInterval(this.whiteInterval1);
@@ -1442,7 +1442,7 @@ class PacmanModel {
         
                                 this.ghostSettings[i].color = this.ghostSettings[i].mainColor;
                                 this.ghostSettings[i].speed = 3;
-                            }, 10000);   
+                            }, 7000);   
                             break;
                         case 1:
                             this.ghostTimePreEnd2 = setTimeout(() => {
@@ -1455,7 +1455,7 @@ class PacmanModel {
                                         this.ghostSettings[i].color = "blue";  
                                     }, 400);
                                 }
-                            }, 7000);
+                            }, 5000);
         
                             this.ghostTimeEnd2 = setTimeout(() => {
                                 clearInterval(this.whiteInterval2);
@@ -1463,7 +1463,7 @@ class PacmanModel {
         
                                 this.ghostSettings[i].color = this.ghostSettings[i].mainColor;
                                 this.ghostSettings[i].speed = 3;
-                            }, 10000);   
+                            }, 7000);   
                             break;
                         case 2:
                             this.ghostTimePreEnd3 = setTimeout(() => {
@@ -1476,7 +1476,7 @@ class PacmanModel {
                                         this.ghostSettings[i].color = "blue";  
                                     }, 400);
                                 }
-                            }, 7000);
+                            }, 5000);
         
                             this.ghostTimeEnd3 = setTimeout(() => {
                                 clearInterval(this.whiteInterval3);
@@ -1484,7 +1484,7 @@ class PacmanModel {
         
                                 this.ghostSettings[i].color = this.ghostSettings[i].mainColor;
                                 this.ghostSettings[i].speed = 3;
-                            }, 10000);   
+                            }, 7000);   
                             break;
                         case 3:
                             this.ghostTimePreEnd4 = setTimeout(() => {
@@ -1497,7 +1497,7 @@ class PacmanModel {
                                         this.ghostSettings[i].color = "blue";  
                                     }, 400);
                                 }
-                            }, 7000);
+                            }, 5000);
         
                             this.ghostTimeEnd4 = setTimeout(() => {
                                 clearInterval(this.whiteInterval4);
@@ -1505,7 +1505,7 @@ class PacmanModel {
         
                                 this.ghostSettings[i].color = this.ghostSettings[i].mainColor;
                                 this.ghostSettings[i].speed = 3;
-                            }, 10000);   
+                            }, 7000);   
                             break;
                         default:
                             break;
