@@ -84,6 +84,7 @@ class PacmanView {
                 <div class="three">
                     <h1>GAME OVER</h1>
                 </div>
+                    <h2 style="color: #f69a73;">Ваш счёт: ${this.scorePoint}</h2>
                 <form class="decor">
                     <div class="form-left-decoration"></div>
                     <div class="circle"></div>
