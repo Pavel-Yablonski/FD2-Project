@@ -1808,7 +1808,7 @@ class PacmanModel {
                 }
     
                 for (let i = 0; i < this.bonusPillsThird.length; i++) {
-                    this.bonusPillsThird[i].color = "white";
+                    this.bonusPillsThird[i].color = "purple";
                 }
 
                 for (let i = 0; i < this.pillsFirst.length; i++) {
