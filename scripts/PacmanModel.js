@@ -922,7 +922,7 @@ class PacmanModel {
             {x: 655, y: 725, width: 10, height: 10, r: 5, color: "purple"},
         ];
 
-        this.countPillsThird = 202;
+        this.countPillsThird = 201;
         // ------------------------------------------------------------------------
         this.pacmanSettings = {
             height: 55,
