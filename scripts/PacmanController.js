@@ -92,7 +92,7 @@ class PacmanController {
                     let name = this.container.querySelector("#name-input").value;
 
                     if (name) {
-                        window.location.hash = "menu";
+                        this.model.viewModal();
                         this.model.saveScore(name);
                     }
                     break;
@@ -110,6 +110,9 @@ class PacmanController {
                     event.preventDefault();
                     window.location.hash = "menu";
                     break;
+                case this.container.querySelector("i"):
+                    event.preventDefault();
+                    this.model.setSound();
                 default:
                     break;
                 }

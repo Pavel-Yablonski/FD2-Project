@@ -922,7 +922,7 @@ class PacmanModel {
             {x: 655, y: 725, width: 10, height: 10, r: 5, color: "purple"},
         ];
 
-        this.countPillsThird = 201;
+        this.countPillsThird = 202;
         // ------------------------------------------------------------------------
         this.pacmanSettings = {
             height: 55,
@@ -1058,6 +1058,8 @@ class PacmanModel {
         this.set = false;
 
         this.death = false;
+
+        this.sound = true;
     }
 
     updateState() {     // SPA
@@ -1077,6 +1079,11 @@ class PacmanModel {
             clearInterval(intervalId);
             this.time = null;
         }, 4000);
+    }
+
+    setSound() {
+        this.sound ? this.sound = false : this.sound = true;
+        this.view.setSoundIcon();
     }
 
     setGame() { // set settings for game (lvl)
@@ -1148,6 +1155,8 @@ class PacmanModel {
 
         requestAnimationFrame(this.setTimer.bind(this));
 
+        this.livesSet();
+
         this.view.createGame();
 
         this.startSound();
@@ -1169,41 +1178,50 @@ class PacmanModel {
             this.pacmanRun();
             this.ghostRun();
             this.score();
-            this.livesSet();
             this.animBonusPills();
 
             requestAnimationFrame(this.createGame.bind(this));
         }
     } 
 
-    startSound() {      
-        let startAudio = new Audio;
-        startAudio.src = "./music/opening_song.mp3";
-        startAudio.autoplay = true;
+    startSound() {
+        if (this.sound) {
+            let startAudio = new Audio;
+            startAudio.src = "./music/opening_song.mp3";
+            startAudio.autoplay = true;
+        }      
     }
 
     eatingPillsSound() {
-        let eatingPillsAudio = new Audio;
-        eatingPillsAudio.src = "./music/eating_short.mp3";
-        eatingPillsAudio.autoplay = true;
+        if (this.sound) {
+            let eatingPillsAudio = new Audio;
+            eatingPillsAudio.src = "./music/eating_short.mp3";
+            eatingPillsAudio.autoplay = true;
+        }
     }
 
     eatingBonusSound() {
-        let eatingAudio = new Audio;
-        eatingAudio.src = "./music/eatpill.mp3";
-        eatingAudio.autoplay = true;
+        if (this.sound) {
+            let eatingAudio = new Audio;
+            eatingAudio.src = "./music/eatpill.mp3";
+            eatingAudio.autoplay = true;
+        }
     }
 
     eatingGhostSound() {
-        let eatingGhostAudio = new Audio;
-        eatingGhostAudio.src = "./music/eatghost.mp3";
-        eatingGhostAudio.autoplay = true;
+        if (this.sound) {
+            let eatingGhostAudio = new Audio;
+            eatingGhostAudio.src = "./music/eatghost.mp3";
+            eatingGhostAudio.autoplay = true;
+        }
     }
 
     deathSound() {
-        let deathAudio = new Audio;
-        deathAudio.src = "./music/die.mp3";
-        deathAudio.autoplay = true; 
+        if (this.sound) {
+            let deathAudio = new Audio;
+            deathAudio.src = "./music/die.mp3";
+            deathAudio.autoplay = true; 
+        }
     }
     
     setWalls() {    // push walls settings to view
@@ -1870,7 +1888,7 @@ class PacmanModel {
         clearInterval(this.directionIntervalForGhost);
 
         for (let i = 0; i < 4; i++) {
-            this.ghostSettings[i].speed = 2.5;
+            this.ghostSettings[i].speed = 3;
             this.ghostSettings[i].color = this.ghostSettings[i].mainColor;  
         }
 
@@ -1946,6 +1964,10 @@ class PacmanModel {
         this.setGame();
     }
 
+    viewModal() {
+        this.view.viewModal();
+    }
+
     saveScore(_name) {
         let name = _name;
         let id = 0;
@@ -1958,11 +1980,40 @@ class PacmanModel {
             myAppDB.ref(`Users/${id}/${name}`).set({
                 score: `${this.scorePoint}`,
             })
+            .then(() => {
+                let arrScore = [];
+                let that = this;
+                let position = 0;
+                myAppDB.ref("Users/").once("value")
+                .then(function(snapshot) {
+                    for (let i = 0; i < snapshot.val().length; i++) {
+                        for (let key in snapshot.val()[i]) {
+                            arrScore.push({name: key, score: +snapshot.val()[i][key].score});
+                        }
+                    }
+        
+                    arrScore.sort((a, b) => a.score > b.score ? 1 : -1);
+                    arrScore.reverse();
+                })
+                .then(() => {
+                    for (let i = 0; i < arrScore.length; i++) {
+                        if (arrScore[i].name === name && arrScore[i].score === +this.scorePoint) {
+                            position = i + 1;
+                            break;
+                        }
+                    }
+
+                    this.scorePoint = 0;
+        
+                    that.view.getPosition(position, arrScore.length);                   
+                })
+                .catch(function (error) {
+                    console.log("Error: " + error.code);
+                }); 
+            })
             .catch(function (error) {
                 console.error("Ошибка добавления пользователя: ", error);
             });
-
-            this.scorePoint = 0;
         })
         .catch(function (error) {
             console.log("Error: " + error.code);

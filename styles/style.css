@@ -8,6 +8,7 @@ body {
 }
 
 #app {
+    position: relative;
     margin-top: 2%;
     max-width: 690px;
     min-width: 370px;
@@ -41,7 +42,7 @@ body {
     text-transform: uppercase;
     z-index: 1;
     line-height: 60px;
-    min-width: 250px;
+    width: 250px;
     min-height: 100px;
     margin: 100px 0;
     line-height: 100px;
@@ -351,6 +352,53 @@ th:nth-child(2), td:nth-child(2) {
 
 .about button {
     margin: 20px 0;
+}
+
+.sound {
+    position: absolute;
+    margin: 0;
+    width: 50px;
+    min-height: 50px;
+    top: 30px;
+    left: 30px;
+    line-height: 50px;
+    font-size: 25px;
+    text-align: center;
+}
+
+.modal {
+    width: 400px;
+    height: 300px;
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 25px;
+}
+
+.modal-wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.hide {
+    display: none;
+}
+
+.modal button {
+    margin: 10px 0;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 @-webkit-keyframes sk-wave-stretch-delay {

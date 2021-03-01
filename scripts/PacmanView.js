@@ -4,6 +4,10 @@ class PacmanView {
         render: () => {
             return `
             <div class="menu">
+                <button class="menu__button sound" id="sound">
+                    ${this.sound}
+                    <span class="menu__button_mask menu__button_rotates rotates-clockwise graident"></span>
+                    </button>
                 <button class="menu__button" id="start-game">Играть<span class="menu__button_mask menu__button_rotates rotates-clockwise graident"></span></button>
                 <button class="menu__button" id="about">Об игре<span class="menu__button_mask menu__button_rotates rotates-clockwise graident"></span></button>
                 <button class="menu__button" id="records">Рекорды<span class="menu__button_mask menu__button_rotates rotates-clockwise graident"></span></button>
@@ -91,9 +95,21 @@ class PacmanView {
                     <div class="form-inner">
                         <h3>Ваше имя</h3>
                         <input type="text" placeholder="Username" id="name-input" required>
-                        <button type="submit" id="set-record">Отправить</button>
+                        <button id="set-record">Отправить</button>
                     </div>
                 </form>
+                <div id="modal-wrap" class="hide modal-wrap">
+                    <div class="overlay"></div>
+                    <div class="modal" id="modal">
+                        <div class="sk-wave" id="loader">
+                            <div class="sk-rect sk-rect-1"></div>
+                            <div class="sk-rect sk-rect-2"></div>
+                            <div class="sk-rect sk-rect-3"></div>
+                            <div class="sk-rect sk-rect-4"></div>
+                            <div class="sk-rect sk-rect-5"></div>
+                        </div>
+                    </div>
+                </div>
             </div>`;
         } 
     }
@@ -134,6 +150,11 @@ class PacmanView {
         this.recordsArr = [];
 
         this.table = `<table>`;
+
+        this.sound = `<i class="icon-volume-low"></i>`;
+
+        this.position = 0;
+        this.all = 0;
     }
 
     getRecords(records) {
@@ -142,6 +163,21 @@ class PacmanView {
         this.createTable();
 
         this.recordsArr = [];
+    }
+
+    viewModal() {
+        this.container.querySelector("#modal-wrap").classList.remove("hide");
+    }
+
+    getPosition(position, all) {
+        this.position = position;
+        this.all = all;
+
+        this.container.querySelector("#modal").innerHTML = `
+            <h2>Поздравляем!</h2>
+            <p>Вы заняли ${this.position} место из ${this.all}</p>
+            <button class="menu__button" id="back">Окей<span class="menu__button_mask menu__button_rotates rotates-clockwise graident"></span></button>
+            `
     }
 
     createTable() {
@@ -175,6 +211,17 @@ class PacmanView {
 
     getMap(map) {
         this.map = map;
+    }
+
+    setSoundIcon() {
+        this.container.querySelector("i").classList.toggle("icon-volume-low");
+        this.container.querySelector("i").classList.toggle("icon-volume-off");
+
+        if (this.container.querySelector("i").classList.contains("icon-volume-off")) {
+            this.sound = `<i class="icon-volume-off"></i>`;
+        } else {
+            this.sound = `<i class="icon-volume-low"></i>`;
+        }
     }
 
     getSettings(pacman, _settings, ghost) {
