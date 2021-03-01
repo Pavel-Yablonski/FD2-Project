@@ -1060,6 +1060,8 @@ class PacmanModel {
         this.death = false;
 
         this.sound = true;
+
+        this.arrScore = [];
     }
 
     updateState() {     // SPA
@@ -2035,7 +2037,10 @@ class PacmanModel {
             arrScore.sort((a, b) => a.score > b.score ? 1 : -1);
             arrScore.reverse();
 
+            
             that.view.getRecords(arrScore);
+
+            that.arrScore = arrScore;
         })
         .catch(function (error) {
             console.log("Error: " + error.code);

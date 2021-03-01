@@ -1,6 +1,5 @@
 class PacmanView {
     GameMenu = {
-        title: "Pacman-menu",
         render: () => {
             return `
             <div class="menu">
@@ -17,14 +16,12 @@ class PacmanView {
     };
 
     Game = {
-        title: "Pacman-game",
         render: () => {
             return `<canvas id="pacman" width="690px" height="852px"></canvas>`;
         }
     };
 
     AboutPage = {
-        title: "About",
         render: () => {
             return `
             <div class="about">
@@ -59,7 +56,6 @@ class PacmanView {
     }
 
     RecordsPage = {
-        title: "Records",
         render: () => {
             return `
             <div class="records-page" id="records-page">
@@ -81,7 +77,6 @@ class PacmanView {
     }
 
     EndGame = {
-        title: "end-game",
         render: () => {
             return `
             <div class="record-name">
@@ -195,7 +190,6 @@ class PacmanView {
         document.querySelector("#table").innerHTML = this.table;
 
         this.table = `<table>`;
-        // setTimeout(() => this.table = `<table>`, 0);
     }
 
     renderContent(hashPageName) {
@@ -205,7 +199,6 @@ class PacmanView {
             routeName = hashPageName in this.router ? hashPageName : "error";
         }
 
-        window.document.title = this.router[routeName].title;
         this.container.innerHTML = this.router[routeName].render();
     }
 
